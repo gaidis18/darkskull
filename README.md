@@ -5,7 +5,7 @@
 Python malware to steal all files with the defined extension, delete the original content, share and then auto-destroy all the evidences.
 
 ## How it Works:
-Inside the defined directory, darkskull will get all files with the passed extension. All contents of these files will be deleted and passed to a text file that will be sent to the defined email. When finished the theft and sharing, the text file and source code will self-destruct, leaving no trace behind.
+Inside the defined directory, darkskull will get all files with the passed extension. All contents of these files will be deleted and subscribed to a text file that will be sent to the defined email. When finished the theft and sharing, the text file and source code will self-destruct, leaving no trace behind.
 
 ## First instructions:
 1º Change the content of fromaddr and frompass to the email you will use to send the content.(Do not use your personal email, and enable the use of less secure apps)
