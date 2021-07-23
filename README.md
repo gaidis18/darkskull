@@ -18,7 +18,7 @@ Inside the defined directory, darkskull will get all files with the passed exten
 
 -m or --mail: e-mail you want to receive the information.(Example: -m mail@address)
 
--d or --directory: directory that will do the search.(Example: --directory ../)
+-d or --directory: directory that will do the search.(Example: --directory ./Documents/example or ../../Downloads/example)
 
 
 
