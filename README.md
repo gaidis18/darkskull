@@ -1,5 +1,5 @@
 # darkskull - Malware 
-![image](https://user-images.githubusercontent.com/65406173/126813287-6e373379-9163-4a07-983d-31ee17678f3b.png)
+
 ![23 07 2021_14 16 30_REC_Trim](https://user-images.githubusercontent.com/65406173/126818664-e8a439ed-33de-4e78-88e2-8eff28a1cd34.gif)
 
 Python malware to steal all files with the defined extension, delete the original content, share and then auto-destroy all the evidences.
